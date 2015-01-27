@@ -169,7 +169,7 @@ namespace Neuron.Esb.Adapters
             try
             {
                 // *** place clean up work here
-                sp.Close();
+                //sp.Close();
             }
             catch (Exception ex)
             {
@@ -207,7 +207,7 @@ namespace Neuron.Esb.Adapters
             }
             finally
             {
-                sp.Close();
+                //sp.Close();
             }
         }
 
