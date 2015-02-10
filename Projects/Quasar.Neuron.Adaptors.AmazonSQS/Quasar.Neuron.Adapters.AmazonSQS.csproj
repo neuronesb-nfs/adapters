@@ -31,20 +31,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Neuron">
-      <HintPath>..\References\3.5\Neuron.dll</HintPath>
+    <Reference Include="Neuron, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ed764b6eccb2f6cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\3.5\Neuron.dll</HintPath>
     </Reference>
-    <Reference Include="Neuron.Esb">
-      <HintPath>..\References\3.5\Neuron.Esb.dll</HintPath>
+    <Reference Include="Neuron.Esb, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ed764b6eccb2f6cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\3.5\Neuron.Esb.dll</HintPath>
     </Reference>
-    <Reference Include="Neuron.Esb.XmlSerializers">
-      <HintPath>..\References\3.5\Neuron.Esb.XmlSerializers.dll</HintPath>
+    <Reference Include="Neuron.Esb.XmlSerializers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ed764b6eccb2f6cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\3.5\Neuron.Esb.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="Neuron.Pipelines">
-      <HintPath>..\References\3.5\Neuron.Pipelines.dll</HintPath>
+    <Reference Include="Neuron.Pipelines, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ed764b6eccb2f6cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\3.5\Neuron.Pipelines.dll</HintPath>
     </Reference>
-    <Reference Include="Neuron.Scripting">
-      <HintPath>..\References\3.5\Neuron.Scripting.dll</HintPath>
+    <Reference Include="Neuron.Scripting, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ed764b6eccb2f6cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\3.5\Neuron.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
