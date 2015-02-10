@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adaptors.Seri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adaptors.Twitter", "Projects\Quasar.Neuron.Adaptors.Twitter\Quasar.Neuron.Adaptors.Twitter.csproj", "{D216CB33-7D1F-4E74-97D8-6ADB4A1CA838}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Adapter.AmazonSQS.IntegrationTest", "IntegrationTests\Quasar.Adapter.AmazonSQS.IntegrationTests\Quasar.Adapter.AmazonSQS.IntegrationTest.csproj", "{AA9F878F-2ED9-482C-8880-CC146B4A34ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{D216CB33-7D1F-4E74-97D8-6ADB4A1CA838}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D216CB33-7D1F-4E74-97D8-6ADB4A1CA838}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D216CB33-7D1F-4E74-97D8-6ADB4A1CA838}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA9F878F-2ED9-482C-8880-CC146B4A34ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA9F878F-2ED9-482C-8880-CC146B4A34ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA9F878F-2ED9-482C-8880-CC146B4A34ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA9F878F-2ED9-482C-8880-CC146B4A34ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +71,6 @@ Global
 		{9231F440-AA7B-45EE-BB3F-4350E519E96A} = {F8D6DEB9-4B68-4282-BB26-57F330C87A26}
 		{FD53A97D-CA08-4E1C-BFE9-E4AAEE512A1F} = {F8D6DEB9-4B68-4282-BB26-57F330C87A26}
 		{D216CB33-7D1F-4E74-97D8-6ADB4A1CA838} = {F8D6DEB9-4B68-4282-BB26-57F330C87A26}
+		{AA9F878F-2ED9-482C-8880-CC146B4A34ED} = {280B664F-9B2C-47F8-9D38-890BCE4F35FE}
 	EndGlobalSection
 EndGlobal
