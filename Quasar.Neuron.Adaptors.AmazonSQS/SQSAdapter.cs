@@ -1,8 +1,15 @@
-﻿using System.ComponentModel;
+﻿//-----------------------------------------------------------------------
+// <copyright company="Neudesic LLC" file="SQSService.cs" >
+//     Copyright (c) Neudesic LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System.ComponentModel;
 using System.Transactions;
 using System;
 using System.Globalization;
 using Neuron.Esb.Pipelines;
+using Quasar.Neuron.Adaptors.AmazonSQS;
 
 /// <summary>
 /// Namespace for adapter assembly. 
@@ -24,6 +31,8 @@ namespace Neuron.Esb.Adapters
     /// </summary>
     public partial class SQSAdapter
     {
+        private readonly ISQSService sqsService;
+
         #region Constants and types
         /// <summary>
         /// These 2 constants are important.  They are used within the Neuron ESB Explorer at runtime and design time for 
@@ -43,8 +52,8 @@ namespace Neuron.Esb.Adapters
         /// The _adapterName constant defines a "user friendly name" that is used to in the Adapter Registration screen within the 
         /// Neuron ESB Explorer. Its the name listed in the drop down adapter list when registrating an adapter. 
         /// </summary>
-        private const string MetadataPrefix = "prefix";
-        private const string AdapterName = "SQS Adapter";
+        private const string MetadataPrefix = "amazon";
+        private const string AdapterName = "Amazon SQS Adapter";
         #endregion
 
         /// <summary>
@@ -224,15 +233,13 @@ namespace Neuron.Esb.Adapters
         /// </remarks>
         public SQSAdapter()
         {
+            this.sqsService = new SQSService();
+
             AdapterModes = new AdapterMode[]
             { 
-                /// To control what is displayed and supporte in the neuron explorer UI, comment out the modes
-                /// that you do not wish to support
-                new AdapterMode(AdapterModeStringsEnum.Subscriber.Description(), MessageDirection.DatagramSender),      // subscribe mode - send messages to an FTP server
-                new AdapterMode(AdapterModeStringsEnum.Publish.Description(), MessageDirection.DatagramReceiver),     // Receive mode - new files are obtained from ftp server and published to the bus
-                new AdapterMode(AdapterModeStringsEnum.SolicitResponse.Description(), MessageDirection.RequestReplySender),      // SolicitResponse/Query mode - adapter writes message to outbound system, waits for reply, returns reply message from outbound system back to bus
-                new AdapterMode(AdapterModeStringsEnum.RequestReply.Description(), MessageDirection.RequestReplyReceiver)    // RequestReply mode - Client submits request to the listening adapter endpoint, adapter picks up, sends to bus, returns message from bus back to client
-
+                //// Subscription adapters are responsible for publishing messages from Neuron to an external system.
+                //// Subscribe mode - send messages to Amazon SQS
+                new AdapterMode(AdapterModeStringsEnum.Subscriber.Description(), MessageDirection.DatagramSender),      
             };
 
             ESBAdapterCapabilities caps = new ESBAdapterCapabilities();
@@ -329,11 +336,6 @@ namespace Neuron.Esb.Adapters
                     case AdapterModeStringConstants.Subscribe:
                         SendToDataSource(message);
                         break;
-
-                    case AdapterModeStringConstants.SolicitResponse:
-                        QueryDataSource(message);
-                        break;
-
                     default:
                         throw new InvalidOperationException(string.Format("Error in {0}, mode {1} not supported", AdapterName, this._adapterMode.ModeName));
                 }
@@ -363,37 +365,12 @@ namespace Neuron.Esb.Adapters
             try
             {
                //*****************************************************************************
-
-                PublishMessageFromSource();
-
-           
             }
             finally
             {
 
             }
         }
-
-        private void InitializeRequestReplyListener()
-        {
-            ESBMessage message;
-
-            // Do work here to setup a listener
-
-            // DO WORK HERE TO GET DATA FROM Listerner
-
-            // CREATE ESB MESSAGE FROM DATA RETREIVED FROM Listerner
-            message = CreateEsbMessage(new byte[1],MessageProperties,MetadataPrefix,PublishTopic);
-
-            // OR
-            message = CreateEsbMessage("<xml>some data</xml>",MessageProperties,MetadataPrefix,PublishTopic);
-
-            // Once a message is received, publish to bus and await a reply
-            ESBMessage reply = PublishEsbMessage(message, 60);
-
-            // once reply is received, return reply to calling client
-        }
-
         #endregion
 
         #region Send Functions
@@ -404,71 +381,21 @@ namespace Neuron.Esb.Adapters
         /// </summary>
         private void SendToDataSource(ESBMessage message)
         {
-            // do work here
-
-        }
-
-        /// <summary>
-        /// called from SendToDataSource(). 
-        /// This is a one way send to a back end system, protocol, transport, etc
-        /// </summary>
-        private void QueryDataSource(ESBMessage message)
-        {
             try
             {
-                // do work here
-                PublishReplyMessage(message, "some kind of response from previous query to back end system of choice",MessageProperties,MetadataPrefix);
-
+                string msgPayload = Uri.EscapeDataString(message.ToString());
+                RaiseAdapterInfo(ErrorLevel.Info, msgPayload);
+                this.sqsService.SendMessageToSQS(msgPayload);
             }
             catch (Exception ex)
             {
-                /// This is where you can optionally, catch the exception and publish the exception as the Reply message
-                /// and send that reply messsage back to the caller.  Otherwise, if the developer wants to simply report
-                /// the error and have the client timeout, have the adapter policy execute retries,etc then this 
-                /// Try/Catch should be commented out.
-                PublishReplyFromException(message, ex,MessageProperties,MetadataPrefix);
-            }
-        }
+                // using multiple threads so raise error and audit 
+                RaiseAdapterError(ErrorLevel.Error, string.Format("Amazon SQS adapter failed to send the message."), ex);
 
+                ////throw ex;
+            }
+
+        }
         #endregion
-
-        #region Publish Functions
-
-        /// <summary>
-        /// called from ReceiveFromSource(). 
-        /// If an error is raised, the error is reported to the event log, and an attempt is made to audit the 
-        /// message to the Neuron Audit database.
-        /// Demonstrates creating an ESB Message from either Text or Bytes and then publishing that message to the bus
-        /// </summary>
-        private void PublishMessageFromSource()
-        {
-            ESBMessage message = null;
-
-            try
-            {
-                // DO WORK HERE TO GET DATA FROM SOURCE
-
-                // CREATE ESB MESSAGE FROM DATA RETREIVED FROM SOURCE
-                message = CreateEsbMessage(new byte[1], MessageProperties, MetadataPrefix, PublishTopic);
-
-                // OR
-                message = CreateEsbMessage("<xml>some data</xml>", MessageProperties, MetadataPrefix, PublishTopic);
-
-                // PUBLISH ESB MESSAG TO BUS
-                PublishEsbMessage(message);
-
-            }
-            catch (Exception ex)
-            {
-                string msg = string.Format(CultureInfo.InvariantCulture,"The adapter endpoint encountered an error. {0}",ex.Message);
-                String failureDetail = Helper.GetExceptionMessage(Configuration, msg, base.Name, AdapterName, base.PartyId, message, ex);
-
-                // try to audit the message
-                if (AuditOnFailurePublish && MessageAuditService != null) MessageAuditService.AuditMessage(message, ex, base.PartyId, failureDetail);
-
-                throw new Exception(failureDetail);
-            }
-        }
-        #endregion 
     }
 }

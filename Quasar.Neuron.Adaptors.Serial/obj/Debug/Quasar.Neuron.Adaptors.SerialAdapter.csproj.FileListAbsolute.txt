@@ -35,3 +35,7 @@ C:\Connected Systems\Neuron\Quasar\quasar\Quasar.Neuron.Adaptors.Serial\bin\Debu
 C:\Connected Systems\Neuron\Quasar\quasar\Quasar.Neuron.Adaptors.Serial\obj\Debug\Quasar.Neuron.Adaptors.Serial.dll
 C:\Connected Systems\Neuron\Quasar\quasar\Quasar.Neuron.Adaptors.Serial\obj\Debug\Quasar.Neuron.Adaptors.Serial.pdb
 C:\Connected Systems\Neuron\Quasar\quasar\Quasar.Neuron.Adaptors.Serial\obj\Debug\Quasar.Neuron.Adaptors.SerialAdapter.csprojResolveAssemblyReference.cache
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Serial\bin\Debug\Quasar.Neuron.Adaptors.Serial.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Serial\bin\Debug\Quasar.Neuron.Adaptors.Serial.pdb
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Serial\obj\Debug\Quasar.Neuron.Adaptors.Serial.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Serial\obj\Debug\Quasar.Neuron.Adaptors.Serial.pdb

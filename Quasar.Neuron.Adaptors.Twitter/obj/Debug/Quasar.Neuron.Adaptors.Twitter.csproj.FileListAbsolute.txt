@@ -32,3 +32,15 @@ C:\Users\Tanmoy.Sarkar\Desktop\quasar\Quasar.Neuron.Adaptors.Twitter\bin\Debug\N
 C:\Users\Tanmoy.Sarkar\Desktop\quasar\Quasar.Neuron.Adaptors.Twitter\obj\Debug\Quasar.Neuron.Adaptors.Twitter.csprojResolveAssemblyReference.cache
 C:\Users\Tanmoy.Sarkar\Desktop\quasar\Quasar.Neuron.Adaptors.Twitter\obj\Debug\Quasar.Neuron.Adaptors.Twitter.dll
 C:\Users\Tanmoy.Sarkar\Desktop\quasar\Quasar.Neuron.Adaptors.Twitter\obj\Debug\Quasar.Neuron.Adaptors.Twitter.pdb
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\Quasar.Neuron.Adaptors.Twitter.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\Quasar.Neuron.Adaptors.Twitter.pdb
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\RabbitMQ.Client.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\Microsoft.ServiceBus.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\Newtonsoft.Json.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\Neuron.Esb.XmlSerializers.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\obj\Debug\Quasar.Neuron.Adaptors.Twitter.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\obj\Debug\Quasar.Neuron.Adaptors.Twitter.pdb
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\Neuron.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\Neuron.Esb.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\Neuron.Pipelines.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Neuron.Adaptors.Twitter\bin\Debug\Neuron.Scripting.dll

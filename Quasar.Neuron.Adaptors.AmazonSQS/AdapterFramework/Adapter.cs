@@ -1,4 +1,10 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright company="Neudesic LLC" file="SQSAdapter.cs" >
+//     Copyright (c) Neudesic LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -183,7 +189,7 @@ namespace Neuron.Esb.Adapters
             if (this._adapterMode.ModeName.Equals(AdapterModeStringConstants.RequestReply))
             {
                 // call out to sub routine that sets up sample listener
-                InitializeRequestReplyListener();
+                ////InitializeRequestReplyListener();
             }
 
         }

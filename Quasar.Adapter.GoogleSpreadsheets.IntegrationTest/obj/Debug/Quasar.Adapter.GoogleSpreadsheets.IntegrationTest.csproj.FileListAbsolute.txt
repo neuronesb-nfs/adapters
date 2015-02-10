@@ -13,3 +13,7 @@ C:\Users\Tanmoy.Sarkar\Desktop\quasar\Quasar.Adapter.GoogleSpreadsheets.Integrat
 C:\Users\Tanmoy.Sarkar\Desktop\quasar\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest\obj\Debug\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest.csprojResolveAssemblyReference.cache
 C:\Users\Tanmoy.Sarkar\Desktop\quasar\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest\obj\Debug\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest.dll
 C:\Users\Tanmoy.Sarkar\Desktop\quasar\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest\obj\Debug\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest.pdb
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest\bin\Debug\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest\bin\Debug\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest.pdb
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest\obj\Debug\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest.dll
+C:\MaheshPesani\Projects\GitHub\neuronesb-nfs\adapters\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest\obj\Debug\Quasar.Adapter.GoogleSpreadsheets.IntegrationTest.pdb

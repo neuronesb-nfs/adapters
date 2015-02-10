@@ -1,4 +1,10 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright company="Neudesic LLC" file="CertificateConverter.cs" >
+//     Copyright (c) Neudesic LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Neuron.Esb.Internal;
