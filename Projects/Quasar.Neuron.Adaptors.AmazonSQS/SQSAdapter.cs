@@ -9,7 +9,7 @@ using System.Transactions;
 using System;
 using System.Globalization;
 using Neuron.Esb.Pipelines;
-using Quasar.Neuron.Adaptors.AmazonSQS;
+using Quasar.Neuron.Adapters.AmazonSQS;
 
 /// <summary>
 /// Namespace for adapter assembly. 

@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quasar.Neuron.Adaptors.AmazonSQS
+namespace Quasar.Neuron.Adapters.AmazonSQS
 {
     /// <summary>
     /// Amazon SQS Service Interface

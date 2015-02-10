@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{280B664F-9B2C-47F8-9D38-890BCE4F35FE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adaptors", "Adaptors", "{F8D6DEB9-4B68-4282-BB26-57F330C87A26}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{F8D6DEB9-4B68-4282-BB26-57F330C87A26}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{440D4DEC-AD4D-4002-9C51-4475C0276FF4}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Adapter.GoogleSpread
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Adapter.Twitter.IntegrationTest", "IntegrationTests\Quasar.Adapter.Twitter.IntegrationTest\Quasar.Adapter.Twitter.IntegrationTest.csproj", "{1B352D6C-97C6-4049-8909-8CC145F10BE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adaptors.AmazonSQS", "Projects\Quasar.Neuron.Adaptors.AmazonSQS\Quasar.Neuron.Adaptors.AmazonSQS.csproj", "{531BE1A7-9C9E-43D6-AA7D-E11C26C3541B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adapters.AmazonSQS", "Projects\Quasar.Neuron.Adaptors.AmazonSQS\Quasar.Neuron.Adapters.AmazonSQS.csproj", "{531BE1A7-9C9E-43D6-AA7D-E11C26C3541B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adaptors.GoogleSpreadSheets", "Projects\Quasar.Neuron.Adaptors.GoogleSpreadSheets\Quasar.Neuron.Adaptors.GoogleSpreadSheets.csproj", "{9231F440-AA7B-45EE-BB3F-4350E519E96A}"
 EndProject
