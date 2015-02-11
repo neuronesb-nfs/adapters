@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK">
+      <HintPath>..\..\packages\AWSSDK.2.3.18.0\lib\net45\AWSSDK.dll</HintPath>
+    </Reference>
     <Reference Include="Neuron, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ed764b6eccb2f6cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\3.5\Neuron.dll</HintPath>
@@ -71,7 +74,18 @@
     <Compile Include="SQSAdapter.cs" />
     <Compile Include="SQSService.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Release copy /Y "$(ProjectDir)$(OutDir)$(TargetFileName)" "C:\Program Files\Neudesic\Neuron ESB v3\DEFAULT\Adapters\$(TargetFileName)"
+if $(ConfigurationName) == Release copy /Y "$(ProjectDir)$(OutDir)AWSSDK.dll" "C:\Program Files\Neudesic\Neuron ESB v3\DEFAULT\Adapters\AWSSDK.dll"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

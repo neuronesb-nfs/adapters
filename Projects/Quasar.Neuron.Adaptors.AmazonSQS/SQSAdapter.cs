@@ -383,9 +383,15 @@ namespace Neuron.Esb.Adapters
         {
             try
             {
-                string msgPayload = Uri.EscapeDataString(message.ToString());
+                //string msgPayload = Uri.EscapeDataString(message.ToString());
+                string msgPayload = message.ToString();
                 RaiseAdapterInfo(ErrorLevel.Info, msgPayload);
+
+                System.Diagnostics.EventLog.WriteEntry("Application", "Port:" + message.GetProperty("amazon", "Port"));
+                System.Diagnostics.EventLog.WriteEntry("Application", "Port:" + Port);
+
                 this.sqsService.SendMessageToSQS(msgPayload);
+
             }
             catch (Exception ex)
             {
