@@ -8,8 +8,8 @@
     <ProjectGuid>{FD53A97D-CA08-4E1C-BFE9-E4AAEE512A1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Quasar.Neuron.Adaptors</RootNamespace>
-    <AssemblyName>Quasar.Neuron.Adaptors.Serial</AssemblyName>
+    <RootNamespace>Quasar.Neuron.Adapters</RootNamespace>
+    <AssemblyName>Quasar.Neuron.Adapters.Serial</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -34,11 +34,20 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Neuron">
+      <HintPath>..\..\References\3.5\Neuron.dll</HintPath>
+    </Reference>
     <Reference Include="Neuron.Esb">
-      <HintPath>..\..\..\..\..\Program Files\Neudesic\Neuron ESB v3\DEFAULT\Neuron.Esb.dll</HintPath>
+      <HintPath>..\..\References\3.5\Neuron.Esb.dll</HintPath>
+    </Reference>
+    <Reference Include="Neuron.Esb.XmlSerializers">
+      <HintPath>..\..\References\3.5\Neuron.Esb.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Neuron.Pipelines">
-      <HintPath>..\..\..\..\..\Program Files\Neudesic\Neuron ESB v3\DEFAULT\Neuron.Pipelines.dll</HintPath>
+      <HintPath>..\..\References\3.5\Neuron.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="Neuron.Scripting">
+      <HintPath>..\..\References\3.5\Neuron.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

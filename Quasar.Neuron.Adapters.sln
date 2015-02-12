@@ -18,9 +18,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Adapter.Twitter.Inte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adapters.AmazonSQS", "Projects\Quasar.Neuron.Adaptors.AmazonSQS\Quasar.Neuron.Adapters.AmazonSQS.csproj", "{531BE1A7-9C9E-43D6-AA7D-E11C26C3541B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adaptors.GoogleSpreadSheets", "Projects\Quasar.Neuron.Adaptors.GoogleSpreadSheets\Quasar.Neuron.Adaptors.GoogleSpreadSheets.csproj", "{9231F440-AA7B-45EE-BB3F-4350E519E96A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adapters.GoogleSpreadSheets", "Projects\Quasar.Neuron.Adaptors.GoogleSpreadSheets\Quasar.Neuron.Adapters.GoogleSpreadSheets.csproj", "{9231F440-AA7B-45EE-BB3F-4350E519E96A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adaptors.SerialAdapter", "Projects\Quasar.Neuron.Adaptors.Serial\Quasar.Neuron.Adaptors.SerialAdapter.csproj", "{FD53A97D-CA08-4E1C-BFE9-E4AAEE512A1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adapters.SerialAdapter", "Projects\Quasar.Neuron.Adaptors.Serial\Quasar.Neuron.Adapters.SerialAdapter.csproj", "{FD53A97D-CA08-4E1C-BFE9-E4AAEE512A1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adapters.Twitter", "Projects\Quasar.Neuron.Adaptors.Twitter\Quasar.Neuron.Adapters.Twitter.csproj", "{D216CB33-7D1F-4E74-97D8-6ADB4A1CA838}"
 EndProject

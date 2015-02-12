@@ -7,8 +7,8 @@
     <ProjectGuid>{9231F440-AA7B-45EE-BB3F-4350E519E96A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Quasar.Neuron.Adaptors.GoogleSpreadSheets</RootNamespace>
-    <AssemblyName>Quasar.Neuron.Adaptors.GoogleSpreadSheets</AssemblyName>
+    <RootNamespace>Quasar.Neuron.Adapters.GoogleSpreadSheets</RootNamespace>
+    <AssemblyName>Quasar.Neuron.Adapters.GoogleSpreadSheets</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
