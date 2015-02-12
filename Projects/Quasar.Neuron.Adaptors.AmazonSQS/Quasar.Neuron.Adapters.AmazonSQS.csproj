@@ -74,6 +74,7 @@
     <Compile Include="Contracts\ISQSService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQSAdapter.cs" />
+    <Compile Include="SQSService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
