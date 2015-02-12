@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Neuron ESB <Name> Adapter")]
+[assembly: AssemblyTitle("Quasar.Neuron.Adapters.SerialAdapter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Neudesic")]
-[assembly: AssemblyProduct("Neuron ESB <Name> Adapter")]
+[assembly: AssemblyProduct("Quasar.Neuron.Adapters.SerialAdapter")]
 [assembly: AssemblyCopyright("Copyright © Neudesic 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Quasar.Neuron.Adaptors.Twitter")]
+[assembly: AssemblyTitle("Quasar.Neuron.Adapters.Twitter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Neudesic, LLC")]
-[assembly: AssemblyProduct("Quasar.Neuron.Adaptors.Twitter")]
+[assembly: AssemblyProduct("Quasar.Neuron.Adapters.Twitter")]
 [assembly: AssemblyCopyright("Copyright © Neudesic, LLC 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
