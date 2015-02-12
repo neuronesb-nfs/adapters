@@ -20,29 +20,30 @@ namespace Quasar.Neuron.Adapters.AmazonSQS
     /// </summary>
     public class SQSService : ISQSService
     {
-
-        public void SendMessageToSQS(string msgPayload)
+        /// <summary>
+        /// Send messgae to Amazon SQS Queue
+        /// </summary>
+        /// <param name="sqsSendMessage"></param>
+        public void SendMessageToSQS(SQSSendMessage sqsSendMessage)
         {
-            System.Diagnostics.EventLog.WriteEntry("Application", msgPayload);
 
-            string accessKey = "AKIAIF5XX6JILIB3QSNA";
-            string secretAccessKey = "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";
+            ////Create and initialize an AmazonSQSConfig instance, and set the ServiceURL property with the protocol and service endpoint
             var amazonSQSConfig = new AmazonSQSConfig();
-            amazonSQSConfig.ServiceURL = "http://sqs.us-west-2.amazonaws.com";
-            var sqs = AWSClientFactory.CreateAmazonSQSClient(accessKey, secretAccessKey, amazonSQSConfig);
+            amazonSQSConfig.ServiceURL = sqsSendMessage.ServiceURL;
 
-            string queueUrl = "https://sqs.us-west-2.amazonaws.com/389642382467/neuron_sqs_test";
+            ////Use the AmazonSQSConfig instance to create and initialize an AmazonSQSClient instance
+            var sqs = AWSClientFactory.CreateAmazonSQSClient(sqsSendMessage.AccessKey, sqsSendMessage.SecretAccessKey, amazonSQSConfig);
 
-            //Sending a message
+            ////Sending a message : Create and initialize a SendMessageRequest instance. Specify the queue name and the message to send,
             var sendMessageRequest = new SendMessageRequest
             {
-                QueueUrl = queueUrl,
-                MessageBody = msgPayload
+                QueueUrl = sqsSendMessage.QueueUrl,
+                MessageBody = sqsSendMessage.MessagePayload
             };
             sqs.SendMessage(sendMessageRequest);
-        }
+            ////var sendMessageResponse = sqs.SendMessage(sendMessageRequest);        }
 
-        public void ReceiveMessageFromSQS(string msgPayload)
+        public void ReceiveMessageFromSQS(SQSReceiveMessage sqsReceiveMessage)
         {
             throw new NotImplementedException();
         }

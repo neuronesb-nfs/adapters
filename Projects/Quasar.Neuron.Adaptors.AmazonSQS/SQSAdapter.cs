@@ -69,154 +69,33 @@ namespace Neuron.Esb.Adapters
         /// </summary>
         #region SAMPLE: Public Properties to Expose and Control in UI
 
-        /// <summary>
-        /// Used by the "PropertyAttributesProvider" attribute used to decorate properties
-        /// where the user can control visiblitiy of the property based on the value of other 
-        /// properties
-        /// </summary>
-        /// <param name="attributes"></param>
-        public void DynamicCredentialsAttributesProvider(PropertyAttributes attributes)
-        {
-            attributes.IsBrowsable = (Anonymous == false);
-        }
-
-        /// <summary>
-        /// Used by the "PropertyAttributesProvider" attribute used to decorate properties
-        /// where the user can control visiblitiy of the property based on the value of other 
-        /// properties
-        /// </summary>
-        /// <param name="attributes"></param>
-        public void DynamicHttpProxyAttributesProvider(PropertyAttributes attributes)
-        {
-            attributes.IsBrowsable = (HttpProxy == true);
-        }
-
-        private string _server = "localhost";
-        [DisplayName("Server Name")]
+        [DisplayName("Access Key")]
         [Category("(General)")]
-        [Description("The name or IP address of the FTP Server to connect to.")]
-        [DefaultValue("localhost")]
-        [PropertyOrder(0)]
-        public string Server
-        {
-            get { return _server; }
-            set { _server = value; }
-        }
-
-        private int _port = 21;
-        [DisplayName("Port")]
-        [Category("(General)")]
-        [Description("The port number of the FTP Server. This is usually 21")]
-        [DefaultValue(21)]
+        [Description("Amazon SQS Access Key")]
+        [DefaultValue("")]
         [PropertyOrder(1)]
-        public int Port
-        {
-            get { return _port; }
-            set { _port = value; }
-        }
+        public string AccessKey { get; set; }
 
-        [DisplayName("Certificate")]
+        [DisplayName("Secret Access Key")]
         [Category("(General)")]
-        [Description("Select a Certificate configured in the Security section of the Neuron ESB Explorer to secure communication with the FTP Server IF the FTP Server requests a Certificate.")]
-        [PropertyOrder(8)]
-        [TypeConverter(typeof(CertificateConverter))]
-        public string SecureCertificate { get; set; }
-        
-
-        private bool _anonymous = true;
-        [DisplayName("Anonymous Connection")]
-        [Category("(General)")]
-        [Description("Connect to the FTP Server using Anonymous logon")]
-        [DefaultValue(true)]
-        [PropertyOrder(9)]
-        public bool Anonymous
-        {
-            get { return _anonymous; }
-            set { _anonymous = value; }
-        }
-
-        [DisplayName("  User Name")]
-        [Category("(General)")]
-        [Description("User Id for FTP Server logon.")]
+        [Description("Amazon SQS Secret Access Key")]
         [DefaultValue("")]
-        [PropertyOrder(10)]
-        [PropertyAttributesProvider("DynamicCredentialsAttributesProvider")]
-        public string UserName { get; set; }
+        [PropertyOrder(2)]
+        public string SecretAccessKey { get; set; }
 
-        [PasswordPropertyText(true)]
-        [DisplayName("  Password")]
+        [DisplayName("Service URL")]
         [Category("(General)")]
-        [Description("The password for FTP Server logon.")]
-        [DefaultValue("guest")]
-        [PropertyOrder(11)]
-        [PropertyAttributesProvider("DynamicCredentialsAttributesProvider")]
-        [Bindable(false)]
-        public string Password { get; set; }
+        [Description("Amazon SQS Service Region URL")]
+        [DefaultValue("http://sqs.us-west-2.amazonaws.com")]
+        [PropertyOrder(3)]
+        public string ServiceURL { get; set; }
 
-
-        [DisplayName("HTTP Proxy")]
+        [DisplayName("Queue Url")]
         [Category("(General)")]
-        [Description("Connect to the FTP Server using an HTTP Proxy Server")]
-        [DefaultValue(false)]
-        [PropertyOrder(12)]
-        public bool HttpProxy { get; set; }
-
-        private string _httpProxyaddress = "http://localhost";
-        [DisplayName("  Address")]
-        [Category("(General)")]
-        [Description("Url address to HTTP Proxy.")]
-        [DefaultValue("http://localhost")]
-        [PropertyOrder(13)]
-        [PropertyAttributesProvider("DynamicHttpProxyAttributesProvider")]
-        public string HttpProxyAddress
-        {
-            get { return _httpProxyaddress; }
-            set { _httpProxyaddress = value; }
-        }
-
-        private int _httpPort = 8080;
-        [DisplayName("  Port")]
-        [Category("(General)")]
-        [Description("The port for the HTTP Proxy Server address")]
-        [DefaultValue(8080)]
-        [PropertyOrder(14)]
-        [PropertyAttributesProvider("DynamicHttpProxyAttributesProvider")]
-        public int HttpProxyPort
-        {
-            get { return _httpPort; }
-            set { _httpPort = value; }
-        }
-
-        [DisplayName("  User Name")]
-        [Category("(General)")]
-        [Description("User Id for HTTP Proxy Server logon.")]
-        [DefaultValue("")]
-        [PropertyOrder(15)]
-        [PropertyAttributesProvider("DynamicHttpProxyAttributesProvider")]
-        public string HttpProxyUserName { get; set; }
-
-        [DisplayName("  Password")]
-        [Category("(General)")]
-        [Description("The password for HTTP Proxy Server logon.")]
-        [DefaultValue("password")]
-        [PropertyOrder(16)]
-        [PropertyAttributesProvider("DynamicHttpProxyAttributesProvider")]
-        [PasswordPropertyText(true)]
-        public string HttpProxyPassword { get; set; }
-
-
-        private bool _deleteOnGet = true;
-        [DisplayName("Delete After Download")]
-        [Category("Publish Mode Properties")]
-        [Description("Deletes the file on the FTP site after it is retreived. Default is True")]
-        [DefaultValue(true)]
+        [Description("Amazon SQS Queue URL")]
+        [DefaultValue("https://queue.amazonaws.com/YOUR_ACCOUNT_NUMBER/YOUR_QUEUE_NAME")]
         [PropertyOrder(4)]
-        public bool DeleteOnGet
-        {
-            get { return _deleteOnGet; }
-            set { _deleteOnGet = value; }
-        }
-
+        public string QueueUrl { get; set; }
 
         #endregion
 
@@ -250,15 +129,10 @@ namespace Neuron.Esb.Adapters
             // SAMPLE: Sample context properties that will be exposed within Neuron. These can be viewed within the Set Properties Process Step 
             // **************************************************************
             caps.MetadataFieldInfo =
-                MetadataPrefix + ".Server:Name of FTP Server data is sent to or retreived from," +
-                MetadataPrefix + ".Port:FTP Server port," +
-                MetadataPrefix + ".Address:FTP Server address," +
-                MetadataPrefix + ".Username:User name for FTP Server," +
-                MetadataPrefix + ".Folder: Name of Ftp folder which file was retrieved," +
-                MetadataPrefix + ".Filename:Name of file received from, or sent to FTP Server," +
-                MetadataPrefix + ".Length: Lengeth of the file in bytes," + 
-                MetadataPrefix + ".Mode:Represents the configured Adapter Mode for the endpoint";
-
+                MetadataPrefix + ".AccessKey:Amazon SQS access key," +
+                MetadataPrefix + ".SecretAccessKey:Amazon SQS secret acccess key," +
+                MetadataPrefix + ".ServiceURL:Amazon service region url," +
+                MetadataPrefix + ".QueueUrl:Amazon SQS queue url";
             // **************************************************************
             Capabilities = caps;
         }
@@ -273,28 +147,23 @@ namespace Neuron.Esb.Adapters
         /// </summary>
         private void ConnectAdapter()
         {
-            // SAMPLE:  Validation logic for basic properties should be done here
+            // Validation logic for basic properties should be done here
             // ***********************************
-            if (HttpProxy)
-            {
-                if (string.IsNullOrEmpty(HttpProxyAddress)) throw new ArgumentNullException();
-                if (HttpProxyPort < 0) throw new ArgumentOutOfRangeException("HTTP Proxy - Port","You must enter a valid Port number (greater than zero) for the HTTP Proxy server");
-                if (string.IsNullOrEmpty(HttpProxyAddress)) throw new ArgumentNullException("HTTP Proxy - Address", "You must enter the url address of the HTTP Proxy Server");
-            }
-            if (Port < 0) throw new ArgumentOutOfRangeException("FTP Port", "You must enter a valid Port number (greater than zero) for the FTP server");
-            if (string.IsNullOrEmpty(Server)) throw new ArgumentNullException("FTP Server", "You must enter the name or IP address of the FTP Server to connect to");
-            if (!Anonymous & string.IsNullOrEmpty(UserName)) throw new ArgumentNullException("Username", "The Username property to use for logging into the FTP Server cannot be null.");
+            if (string.IsNullOrEmpty(AccessKey)) throw new ArgumentNullException("AccessKey", "You must enter the Amazon SQS access key to connect to the queue service!");
+            if (string.IsNullOrEmpty(SecretAccessKey)) throw new ArgumentNullException("SecretAccessKey", "You must enter the Amazon SQS secret access key to connect to the queue service!");
+            if (string.IsNullOrEmpty(ServiceURL)) throw new ArgumentNullException("ServiceURL", "You must enter the Amazon SQS service region url to connect to the queue!");
+            if (string.IsNullOrEmpty(QueueUrl)) throw new ArgumentNullException("QueueUrl", "You must enter the Amazon SQS queue url to connect!");
 
-
-            // SAMPLE: Custom set metadata properties that will be provided with every message sent or received from Neuron
+            // Custom set metadata properties that will be provided with every message sent or received from Neuron
             // The IncludeMetadata flag is set by the "Include Metadata Properties" checkbox located on the General tab of an 
             // Adapter Endpoint within the Neuron ESB Explorer.
             // ***********************************
             if (IncludeMetadata)
             {
-                MessageProperties.Add(new NameValuePair("Server", Server));
-                MessageProperties.Add(new NameValuePair("Port", Port.ToString()));
-                MessageProperties.Add(new NameValuePair("Username", UserName ));
+                MessageProperties.Add(new NameValuePair("AccessKey", AccessKey));
+                MessageProperties.Add(new NameValuePair("SecretAccessKey", SecretAccessKey));
+                MessageProperties.Add(new NameValuePair("ServiceURL", ServiceURL));
+                MessageProperties.Add(new NameValuePair("QueueUrl", QueueUrl));
             }
 
         }
@@ -345,7 +214,7 @@ namespace Neuron.Esb.Adapters
             {
                 /// Sample demonstrating how you can create a richer exception message.  However, by default, much of this information will be automatically 
                 /// reported by the Neuron runtime once an error is thrown.
-                string msg = string.Format(CultureInfo.InvariantCulture, "'{0}' failed to send the message to the Server '{1}'. {2}", AdapterName,Server, ex.Message);
+                string msg = string.Format(CultureInfo.InvariantCulture, "'{0}' failed to send the message to the Amazon SQS '{1}'. {2}", AdapterName,QueueUrl, ex.Message);
                 String failureDetail = Helper.GetExceptionMessage(Configuration, msg, base.Name, AdapterName, base.PartyId, message, ex);
 
                 // throw the error to ensure the runtime enforces any adapter policies. Once an a policy executes
@@ -383,14 +252,22 @@ namespace Neuron.Esb.Adapters
         {
             try
             {
-                //string msgPayload = Uri.EscapeDataString(message.ToString());
+                ////string msgPayload = Uri.EscapeDataString(message.ToString());
                 string msgPayload = message.ToString();
                 RaiseAdapterInfo(ErrorLevel.Info, msgPayload);
 
-                System.Diagnostics.EventLog.WriteEntry("Application", "Port:" + message.GetProperty("amazon", "Port"));
-                System.Diagnostics.EventLog.WriteEntry("Application", "Port:" + Port);
+                //// Construct SQS send message
+                var sqsSendMessage = new SQSSendMessage
+                {
+                    AccessKey = this.AccessKey,
+                    SecretAccessKey = this.SecretAccessKey,
+                    ServiceURL = this.ServiceURL,
+                    QueueUrl = this.QueueUrl,
+                    MessagePayload = msgPayload
+                };
 
-                this.sqsService.SendMessageToSQS(msgPayload);
+                //// Call SQS service to send the message
+                this.sqsService.SendMessageToSQS(sqsSendMessage);
 
             }
             catch (Exception ex)
