@@ -41,7 +41,8 @@ namespace Quasar.Neuron.Adapters.AmazonSQS
                 MessageBody = sqsSendMessage.MessagePayload
             };
             sqs.SendMessage(sendMessageRequest);
-            ////var sendMessageResponse = sqs.SendMessage(sendMessageRequest);        }
+            ////var sendMessageResponse = sqs.SendMessage(sendMessageRequest);
+        }
 
         public void ReceiveMessageFromSQS(SQSReceiveMessage sqsReceiveMessage)
         {
