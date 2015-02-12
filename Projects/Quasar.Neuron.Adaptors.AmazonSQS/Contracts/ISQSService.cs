@@ -18,13 +18,13 @@ namespace Quasar.Neuron.Adapters.AmazonSQS
     public interface ISQSService
     {
         /// <summary>
-        /// Send message to Amazon SQS
+        /// Send message to Amazon SQS (Publish)
         /// </summary>
         /// <param name="sqsSendMessage">SQSSendMessage</param>
         void SendMessageToSQS(SQSSendMessage sqsSendMessage);
 
         /// <summary>
-        /// Receive message from Amazon SQS
+        /// Receive message from Amazon SQS (Subscribe)
         /// </summary>
         /// <param name="sqsReceiveMessage"></param>
         void ReceiveMessageFromSQS(SQSReceiveMessage sqsReceiveMessage);

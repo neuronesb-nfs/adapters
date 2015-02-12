@@ -112,7 +112,7 @@ namespace Neuron.Esb.Adapters
         /// </remarks>
         public SQSAdapter()
         {
-            this.sqsService = new SQSService();
+            //this.sqsService = new SQSService();
 
             AdapterModes = new AdapterMode[]
             { 
