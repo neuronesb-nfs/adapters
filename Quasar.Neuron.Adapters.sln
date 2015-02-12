@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adaptors.Goog
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adaptors.SerialAdapter", "Projects\Quasar.Neuron.Adaptors.Serial\Quasar.Neuron.Adaptors.SerialAdapter.csproj", "{FD53A97D-CA08-4E1C-BFE9-E4AAEE512A1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adaptors.Twitter", "Projects\Quasar.Neuron.Adaptors.Twitter\Quasar.Neuron.Adaptors.Twitter.csproj", "{D216CB33-7D1F-4E74-97D8-6ADB4A1CA838}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Neuron.Adapters.Twitter", "Projects\Quasar.Neuron.Adaptors.Twitter\Quasar.Neuron.Adapters.Twitter.csproj", "{D216CB33-7D1F-4E74-97D8-6ADB4A1CA838}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quasar.Adapter.AmazonSQS.IntegrationTest", "IntegrationTests\Quasar.Adapter.AmazonSQS.IntegrationTests\Quasar.Adapter.AmazonSQS.IntegrationTest.csproj", "{AA9F878F-2ED9-482C-8880-CC146B4A34ED}"
 EndProject
