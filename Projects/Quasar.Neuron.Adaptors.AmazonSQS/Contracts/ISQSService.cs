@@ -21,12 +21,13 @@ namespace Quasar.Neuron.Adapters.AmazonSQS
         /// Send message to Amazon SQS (Publish)
         /// </summary>
         /// <param name="sqsSendMessage">SQSSendMessage</param>
-        void SendMessageToSQS(SQSSendMessage sqsSendMessage);
+        SQSSendMessageRS SendMessageToSQS(SQSSendMessageRQ sqsSendMessage);
 
         /// <summary>
         /// Receive message from Amazon SQS (Subscribe)
         /// </summary>
         /// <param name="sqsReceiveMessage"></param>
-        void ReceiveMessageFromSQS(SQSReceiveMessage sqsReceiveMessage);
+        SQSReceiveMessageRS ReceiveMessageFromSQS(SQSReceiveMessageRQ sqsReceiveMessage);
+
     }
 }

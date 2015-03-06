@@ -189,7 +189,7 @@ namespace Neuron.Esb.Adapters
             if (this._adapterMode.ModeName.Equals(AdapterModeStringConstants.RequestReply))
             {
                 // call out to sub routine that sets up sample listener
-                ////InitializeRequestReplyListener();
+                //// InitializeRequestReplyListener();
             }
 
         }

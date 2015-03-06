@@ -90,12 +90,19 @@ namespace Neuron.Esb.Adapters
         [PropertyOrder(3)]
         public string ServiceURL { get; set; }
 
-        [DisplayName("Queue Url")]
+        [DisplayName("Egress Queue Url")]
         [Category("(General)")]
         [Description("Amazon SQS Queue URL")]
         [DefaultValue("https://queue.amazonaws.com/YOUR_ACCOUNT_NUMBER/YOUR_QUEUE_NAME")]
         [PropertyOrder(4)]
-        public string QueueUrl { get; set; }
+        public string EgressQueueUrl { get; set; }
+
+        [DisplayName("Ingress Queue Url")]
+        [Category("(General)")]
+        [Description("Amazon SQS Queue URL")]
+        [DefaultValue("https://queue.amazonaws.com/YOUR_ACCOUNT_NUMBER/YOUR_QUEUE_NAME")]
+        [PropertyOrder(5)]
+        public string IngressQueueUrl { get; set; }
 
         #endregion
 
@@ -119,6 +126,10 @@ namespace Neuron.Esb.Adapters
                 //// Subscription adapters are responsible for publishing messages from Neuron to an external system.
                 //// Subscribe mode - send messages to Amazon SQS
                 new AdapterMode(AdapterModeStringsEnum.Subscriber.Description(), MessageDirection.DatagramSender),      
+
+                //// Publication adapters are responsible for publishing messages to Neuron from an external system
+                //// Publish mode - Receive messages from Amazon SQS
+                new AdapterMode(AdapterModeStringsEnum.Publish.Description(), MessageDirection.DatagramReceiver)
             };
 
             ESBAdapterCapabilities caps = new ESBAdapterCapabilities();
@@ -152,7 +163,8 @@ namespace Neuron.Esb.Adapters
             if (string.IsNullOrEmpty(AccessKey)) throw new ArgumentNullException("AccessKey", "You must enter the Amazon SQS access key to connect to the queue service!");
             if (string.IsNullOrEmpty(SecretAccessKey)) throw new ArgumentNullException("SecretAccessKey", "You must enter the Amazon SQS secret access key to connect to the queue service!");
             if (string.IsNullOrEmpty(ServiceURL)) throw new ArgumentNullException("ServiceURL", "You must enter the Amazon SQS service region url to connect to the queue!");
-            if (string.IsNullOrEmpty(QueueUrl)) throw new ArgumentNullException("QueueUrl", "You must enter the Amazon SQS queue url to connect!");
+            if (string.IsNullOrEmpty(EgressQueueUrl)) throw new ArgumentNullException("EgressQueueUrl", "You must enter the Amazon SQS egressqueue url to connect!");
+            if (string.IsNullOrEmpty(IngressQueueUrl)) throw new ArgumentNullException("IngressQueueUrl", "You must enter the Amazon SQS ingressqueue url to connect!");
 
             // Custom set metadata properties that will be provided with every message sent or received from Neuron
             // The IncludeMetadata flag is set by the "Include Metadata Properties" checkbox located on the General tab of an 
@@ -163,7 +175,8 @@ namespace Neuron.Esb.Adapters
                 MessageProperties.Add(new NameValuePair("AccessKey", AccessKey));
                 MessageProperties.Add(new NameValuePair("SecretAccessKey", SecretAccessKey));
                 MessageProperties.Add(new NameValuePair("ServiceURL", ServiceURL));
-                MessageProperties.Add(new NameValuePair("QueueUrl", QueueUrl));
+                MessageProperties.Add(new NameValuePair("EgressQueueUrl", EgressQueueUrl));
+                MessageProperties.Add(new NameValuePair("IngressQueueUrl", IngressQueueUrl));
             }
 
         }
@@ -214,7 +227,7 @@ namespace Neuron.Esb.Adapters
             {
                 /// Sample demonstrating how you can create a richer exception message.  However, by default, much of this information will be automatically 
                 /// reported by the Neuron runtime once an error is thrown.
-                string msg = string.Format(CultureInfo.InvariantCulture, "'{0}' failed to send the message to the Amazon SQS '{1}'. {2}", AdapterName,QueueUrl, ex.Message);
+                string msg = string.Format(CultureInfo.InvariantCulture, "'{0}' failed to send the message to the Amazon SQS '{1}'. {2}", AdapterName,EgressQueueUrl, ex.Message);
                 String failureDetail = Helper.GetExceptionMessage(Configuration, msg, base.Name, AdapterName, base.PartyId, message, ex);
 
                 // throw the error to ensure the runtime enforces any adapter policies. Once an a policy executes
@@ -234,6 +247,7 @@ namespace Neuron.Esb.Adapters
             try
             {
                //*****************************************************************************
+                PublishMessageFromSource();
             }
             finally
             {
@@ -257,17 +271,17 @@ namespace Neuron.Esb.Adapters
                 RaiseAdapterInfo(ErrorLevel.Info, msgPayload);
 
                 //// Construct SQS send message
-                var sqsSendMessage = new SQSSendMessage
+                var sqsSendMessage = new SQSSendMessageRQ
                 {
                     AccessKey = this.AccessKey,
                     SecretAccessKey = this.SecretAccessKey,
                     ServiceURL = this.ServiceURL,
-                    QueueUrl = this.QueueUrl,
+                    EgressQueueUrl = this.EgressQueueUrl,
                     MessagePayload = msgPayload
                 };
 
                 //// Call SQS service to send the message
-                this.sqsService.SendMessageToSQS(sqsSendMessage);
+                var sendResponse = this.sqsService.SendMessageToSQS(sqsSendMessage);
 
             }
             catch (Exception ex)
@@ -280,5 +294,54 @@ namespace Neuron.Esb.Adapters
 
         }
         #endregion
+
+        #region Publish Functions
+
+        /// <summary>
+        /// called from ReceiveFromSource(). 
+        /// If an error is raised, the error is reported to the event log, and an attempt is made to audit the 
+        /// message to the Neuron Audit database.
+        /// Demonstrates creating an ESB Message from either Text or Bytes and then publishing that message to the bus
+        /// </summary>
+        private void PublishMessageFromSource()
+        {
+            ESBMessage message = null;
+
+            try
+            {
+                // DO WORK HERE TO GET DATA FROM SOURCE
+                //// Construct SQS Receive message
+                var sqsReceiveMessageRQ = new SQSReceiveMessageRQ
+                {
+                    AccessKey = this.AccessKey,
+                    SecretAccessKey = this.SecretAccessKey,
+                    ServiceURL = this.ServiceURL,
+                    IngressQueueUrl = this.IngressQueueUrl,
+                };
+
+                //// Call SQS service to send the message
+                var receiveResponse = this.sqsService.ReceiveMessageFromSQS(sqsReceiveMessageRQ);
+
+                // CREATE ESB MESSAGE FROM DATA RETREIVED FROM SOURCE
+                receiveResponse.SQSMessages.ForEach(msg =>
+                {
+                    message = CreateEsbMessage(msg.Body, MessageProperties, MetadataPrefix, PublishTopic);
+
+                    // PUBLISH ESB MESSAGE TO BUS
+                    PublishEsbMessage(message);
+                });
+            }
+            catch (Exception ex)
+            {
+                string msg = string.Format(CultureInfo.InvariantCulture, "The adapter endpoint encountered an error. {0}", ex.Message);
+                String failureDetail = Helper.GetExceptionMessage(Configuration, msg, base.Name, AdapterName, base.PartyId, message, ex);
+
+                // try to audit the message
+                if (AuditOnFailurePublish && MessageAuditService != null) MessageAuditService.AuditMessage(message, ex, base.PartyId, failureDetail);
+
+                throw new Exception(failureDetail);
+            }
+        }
+        #endregion 
     }
 }

@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright company="Neudesic LLC" file="SQSReceiveMessage.cs" >
+// <copyright company="Neudesic LLC" file="SQSReceiveMessageRS.cs" >
 //     Copyright (c) Neudesic LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -12,8 +12,16 @@ using System.Threading.Tasks;
 
 namespace Quasar.Neuron.Adapters.AmazonSQS
 {
-    public class SQSReceiveMessage
+    public class SQSReceiveMessageRS
     {
+        public List<SQSMessage> SQSMessages { get; set; }
 
+    }
+
+    public class SQSMessage
+    {
+        public string Body { get; set; }
+        public string MessageId { get; set; }
+        //public string ReceiptHandle { get; set; }
     }
 }

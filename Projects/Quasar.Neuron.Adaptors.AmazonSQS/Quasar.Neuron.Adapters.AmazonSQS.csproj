@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AWSSDK">
-      <HintPath>..\..\packages\AWSSDK.2.3.18.0\lib\net45\AWSSDK.dll</HintPath>
+    <Reference Include="AWSSDK, Version=2.3.23.0, Culture=neutral, PublicKeyToken=9f476d3089b52be3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\AWSSDK.2.3.23.0\lib\net45\AWSSDK.dll</HintPath>
     </Reference>
     <Reference Include="Neuron, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ed764b6eccb2f6cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -69,8 +70,10 @@
   <ItemGroup>
     <Compile Include="AdapterFramework\Adapter.cs" />
     <Compile Include="AdapterFramework\CertificateConverter.cs" />
-    <Compile Include="Contracts\SQSReceiveMessage.cs" />
-    <Compile Include="Contracts\SQSSendMessage.cs" />
+    <Compile Include="Contracts\SQSReceiveMessageRS.cs" />
+    <Compile Include="Contracts\SQSReceiveMessageRQ.cs" />
+    <Compile Include="Contracts\SQSSendMessageRS.cs" />
+    <Compile Include="Contracts\SQSSendMessageRQ.cs" />
     <Compile Include="Contracts\ISQSService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQSAdapter.cs" />

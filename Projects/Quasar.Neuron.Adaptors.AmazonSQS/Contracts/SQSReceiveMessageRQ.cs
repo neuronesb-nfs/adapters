@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright company="Neudesic LLC" file="SQSSendMessage.cs" >
+// <copyright company="Neudesic LLC" file="SQSReceiveMessageRQ.cs" >
 //     Copyright (c) Neudesic LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 namespace Quasar.Neuron.Adapters.AmazonSQS
 {
     /// <summary>
-    /// Amazon SQS Send Message Class
+    /// Amazon SQS Send Message Request Class
     /// </summary>
-    public class SQSSendMessage
+    public class SQSReceiveMessageRQ
     {
         /// <summary>
         /// Amazon SQS Access Key
@@ -36,7 +36,7 @@ namespace Quasar.Neuron.Adapters.AmazonSQS
         /// Require the queue URL to send, receive, and delete queue messages. A queue URL is constructed
         /// in the following format: https://queue.amazonaws.com/YOUR_ACCOUNT_NUMBER/YOUR_QUEUE_NAME
         /// </summary>
-        public string QueueUrl { get; set; }
+        public string IngressQueueUrl { get; set; }
         /// <summary>
         /// Message Payload
         /// </summary>
