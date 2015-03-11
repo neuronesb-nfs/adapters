@@ -81,6 +81,7 @@ namespace Neuron.Esb.Adapters
         [Description("Amazon SQS Secret Access Key")]
         [DefaultValue("")]
         [PropertyOrder(2)]
+        [PasswordPropertyText(true)]
         public string SecretAccessKey { get; set; }
 
         [DisplayName("Service URL")]
