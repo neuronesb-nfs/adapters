@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AWSSDK">
-      <HintPath>..\..\packages\AWSSDK.2.3.18.0\lib\net45\AWSSDK.dll</HintPath>
+      <HintPath>..\..\packages\AWSSDK.2.3.25.0\lib\net45\AWSSDK.dll</HintPath>
     </Reference>
     <Reference Include="Neuron, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ed764b6eccb2f6cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
