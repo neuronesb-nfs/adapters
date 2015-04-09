@@ -75,11 +75,29 @@
     <Compile Include="Contracts\SQSSendMessageRQ.cs" />
     <Compile Include="Contracts\ISQSService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="SQSAdapter.cs" />
     <Compile Include="SQSService.cs" />
+    <Compile Include="TransientFaultHandling\AmazonSQSExceptionTypes.cs" />
+    <Compile Include="TransientFaultHandling\AmazonSQSTransientErrorDetectionStrategy.cs" />
+    <Compile Include="TransientFaultHandling\AsyncExecution.cs" />
+    <Compile Include="TransientFaultHandling\ExponentialBackoff.cs" />
+    <Compile Include="TransientFaultHandling\FixedInterval.cs" />
+    <Compile Include="TransientFaultHandling\Guard.cs" />
+    <Compile Include="TransientFaultHandling\Incremental.cs" />
+    <Compile Include="TransientFaultHandling\ITransientErrorDetectionStrategy.cs" />
+    <Compile Include="TransientFaultHandling\RetryingEventArgs.cs" />
+    <Compile Include="TransientFaultHandling\RetryLimitExceededException.cs" />
+    <Compile Include="TransientFaultHandling\RetryManager.cs" />
+    <Compile Include="TransientFaultHandling\RetryPolicy.cs" />
+    <Compile Include="TransientFaultHandling\RetryPolicy.Generic.cs" />
+    <Compile Include="TransientFaultHandling\RetryStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

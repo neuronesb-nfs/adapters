@@ -10,6 +10,7 @@ using System;
 using System.Globalization;
 using Neuron.Esb.Pipelines;
 using Quasar.Neuron.Adapters.AmazonSQS;
+using Microsoft.Practices.TransientFaultHandling;
 
 /// <summary>
 /// Namespace for adapter assembly. 
@@ -32,6 +33,7 @@ namespace Neuron.Esb.Adapters
     public partial class SQSAdapter
     {
         private readonly ISQSService sqsService;
+        private RetryPolicy retryPolicy;
 
         #region Constants and types
         /// <summary>
@@ -105,6 +107,43 @@ namespace Neuron.Esb.Adapters
         [PropertyOrder(5)]
         public string IngressQueueUrl { get; set; }
 
+
+        private int _retryCount = 3;
+        [DisplayName("RetryCount")]
+        [Category("(General)")]
+        [Description("RetryCount")]
+        [DefaultValue(3)]
+        [PropertyOrder(6)]
+        public int RetryCount
+        {
+            get { return _retryCount; }
+            set { _retryCount = value; }
+        }
+
+        private int _minBackOff = 1;
+        [DisplayName("Minimum BackOff in Seconds")]
+        [Category("(General)")]
+        [Description("MinBackOff")]
+        [DefaultValue(1)]
+        [PropertyOrder(7)]
+        public int MinBackOff
+        {
+            get { return _minBackOff; }
+            set { _minBackOff = value; }
+        }
+
+        private int _maxBackOff = 10;
+        [DisplayName("Maximum BackOff in Seconds")]
+        [Category("(General)")]
+        [Description("MaxBackOff")]
+        [DefaultValue(10)]
+        [PropertyOrder(8)]
+        public int MaxBackOff
+        {
+            get { return _maxBackOff; }
+            set { _maxBackOff = value; }
+        }
+
         #endregion
 
         /// <summary>
@@ -121,6 +160,9 @@ namespace Neuron.Esb.Adapters
         public SQSAdapter()
         {
             this.sqsService = new SQSService();
+            
+            //// RetryPolicy
+            this.retryPolicy = new RetryPolicy<AmazonSQSTransientErrorDetectionStrategy>(this.RetryCount, new TimeSpan(0, 0, this.MinBackOff), new TimeSpan(0, 0, this.MaxBackOff), new TimeSpan(0, 0, 0));
 
             AdapterModes = new AdapterMode[]
             { 
@@ -281,8 +323,13 @@ namespace Neuron.Esb.Adapters
                     MessagePayload = msgPayload
                 };
 
-                //// Call SQS service to send the message
-                var sendResponse = this.sqsService.SendMessageToSQS(sqsSendMessage);
+                //// ExecuteAction
+                this.retryPolicy.ExecuteAction(
+                () =>
+                {
+                    //// Call SQS service to send the message
+                    var sendResponse = this.sqsService.SendMessageToSQS(sqsSendMessage);
+                });
 
             }
             catch (Exception ex)
@@ -320,8 +367,15 @@ namespace Neuron.Esb.Adapters
                     IngressQueueUrl = this.IngressQueueUrl,
                 };
 
-                //// Call SQS service to send the message
-                var receiveResponse = this.sqsService.ReceiveMessageFromSQS(sqsReceiveMessageRQ);
+                var receiveResponse = new SQSReceiveMessageRS();
+
+                //// ExecuteAction
+                this.retryPolicy.ExecuteAction(
+                () =>
+                {
+                    //// Call SQS service to send the message
+                    receiveResponse = this.sqsService.ReceiveMessageFromSQS(sqsReceiveMessageRQ);
+                });
 
                 // CREATE ESB MESSAGE FROM DATA RETREIVED FROM SOURCE
                 receiveResponse.SQSMessages.ForEach(msg =>
